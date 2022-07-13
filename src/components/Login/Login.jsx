@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React from "react";
+import { useFormik } from "formik";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("second");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!email | !password) {
-      alert(
-        "Es indispensable para que aprendas cosas interesantes que completes"
-      );
-    } else {
-      window.location = "https://cybermap.kaspersky.com";
-    }
+  const initialValues = {
+    email: "",
+    password: "",
   };
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.email) {
+      errors.email = "Email is Required";
+    }
+    if (!values.password) {
+      errors.password = " Password is Required";
+    }
+    return errors;
+  };
+  const onSubmit = () => {
+    localStorage.setItem("logged", "yes");
+  };
+
+  const formik = useFormik({ initialValues, validate, onSubmit });
+
+  const { handleSubmit, handleChange, values, errors } = formik;
+
   return (
     <>
       <div className="container">
@@ -24,18 +36,20 @@ export const Login = () => {
             <input
               type="email"
               name="email"
-              value={email}
-              onChange={(e) => setEmail(e.currentTarget.value)}
+              value={values.email}
+              onChange={handleChange}
             />
+            {errors.email && <div>{errors.email}</div>}
           </div>
           <div>
             <label>Contraseña</label>
             <input
               type="password"
               name="password"
-              value={password}
-              onChange={(e) => setPassword(e.currentTarget.value)}
+              value={values.password}
+              onChange={handleChange}
             />
+            {errors.password && <div>{errors.password}</div>}
           </div>
           <div>
             <button type="submit">Enviar</button>
