@@ -3,8 +3,12 @@ import { useFormik } from "formik";
 
 export const Register = () => {
   const initialValues = {
-    email: "",
+    userName: "",
     password: "",
+    email: "",
+    role: "Team Member",
+    continent: "America",
+    region: "Latam",
   };
 
   const onSubmit = () => {
