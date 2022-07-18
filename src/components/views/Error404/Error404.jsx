@@ -1,3 +1,3 @@
-export const Error404 = () => {
+export default function Error404() {
   return <div className="container">Página no encontrada</div>;
-};
+}
