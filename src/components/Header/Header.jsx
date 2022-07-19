@@ -1,0 +1,16 @@
+import "./Header.styles.css";
+import { useNavigate } from "react-router";
+export const Header = () => {
+  const navigate = useNavigate(true);
+
+  const handleLogout = () => {
+    localStorage.removeItem("logged");
+    navigate("/login", { replace: true });
+  };
+  return (
+    <header>
+      <img src="/img/goscrum.png" alt="Logo" />
+      <div onClick={handleLogout}>X</div>
+    </header>
+  );
+};
