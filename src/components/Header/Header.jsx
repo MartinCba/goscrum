@@ -10,7 +10,7 @@ export const Header = () => {
   return (
     <header>
       <img src="/img/goscrum.png" alt="Logo" />
-      <div onClick={handleLogout}>X</div>
+      <div onClick={handleLogout}>x</div>
     </header>
   );
 };
