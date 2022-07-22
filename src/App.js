@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
-import { Login } from "./components/views/Login/Login.jsx";
-import { Register } from "./components/views/Register/Register";
+import { Login } from "./components/views/auth/Login/Login.jsx";
+import { Register } from "./components/views/auth/Register/Register.jsx";
 import { Tasks } from "./components/views/Tasks";
 import { AnimatePresence, motion } from "framer-motion";
 import { lazy, Suspense } from "react";
