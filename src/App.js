@@ -5,6 +5,7 @@ import { Register } from "./components/views/auth/Register/Register.jsx";
 import { Tasks } from "./components/views/Tasks";
 import { AnimatePresence, motion } from "framer-motion";
 import { lazy, Suspense } from "react";
+import Registered from "./components/views/Registered/Registered";
 
 const Error404 = lazy(() => import("./components/views/Error404/Error404.jsx"));
 
@@ -60,6 +61,20 @@ export const App = () => {
             </motion.div>
           }
         ></Route>
+        <Route
+          path="/registered/:teamID"
+          element={
+            <motion.div
+              className="page"
+              initial="out"
+              animate="in"
+              exit="out"
+              variants={pageTransition}
+            >
+              <Registered />
+            </motion.div>
+          }
+        />
         <Route
           path="/register"
           element={
