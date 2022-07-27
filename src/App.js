@@ -1,17 +1,19 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import "./App.css";
-import { Login } from "./components/views/auth/Login/Login.jsx";
-import { Register } from "./components/views/auth/Register/Register.jsx";
-import { Tasks } from "./components/views/Tasks";
-import { AnimatePresence, motion } from "framer-motion";
 import { lazy, Suspense } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+
+import "./App.css";
+import { Login } from "./components/views/auth/Login/Login";
+import { Tasks } from "./components/views/Tasks/Tasks";
+import { Donate } from "./components/views/Donate/Donate";
+import { Register } from "./components/views/auth/Register/Register";
 import Registered from "./components/views/Registered/Registered";
 
-const Error404 = lazy(() => import("./components/views/Error404/Error404.jsx"));
+const Error404 = lazy(() => import("./components/views/Error404/Error404"));
 
-const RequiredAuth = ({ children }) => {
+const RequireAuth = ({ children }) => {
   if (!localStorage.getItem("token")) {
-    return <Navigate to={"/login"} replace={true} />;
+    return <Navigate to="/login" replace={true} />;
   }
   return children;
 };
@@ -34,7 +36,23 @@ export const App = () => {
         <Route
           path="/"
           element={
-            <RequiredAuth>
+            <motion.div
+              className="page"
+              initial="out"
+              animate="in"
+              exit="out"
+              variants={pageTransition}
+            >
+              <RequireAuth>
+                <Tasks />
+              </RequireAuth>
+            </motion.div>
+          }
+        />
+        <Route
+          path="/donate"
+          element={
+            <RequireAuth>
               <motion.div
                 className="page"
                 initial="out"
@@ -42,11 +60,11 @@ export const App = () => {
                 exit="out"
                 variants={pageTransition}
               >
-                <Tasks />
+                <Donate />
               </motion.div>
-            </RequiredAuth>
+            </RequireAuth>
           }
-        ></Route>
+        />
         <Route
           path="/login"
           element={
@@ -60,7 +78,7 @@ export const App = () => {
               <Login />
             </motion.div>
           }
-        ></Route>
+        />
         <Route
           path="/registered/:teamID"
           element={
@@ -88,7 +106,7 @@ export const App = () => {
               <Register />
             </motion.div>
           }
-        ></Route>
+        />
         <Route
           path="*"
           element={
@@ -104,7 +122,7 @@ export const App = () => {
               </Suspense>
             </motion.div>
           }
-        ></Route>
+        />
       </Routes>
     </AnimatePresence>
   );
