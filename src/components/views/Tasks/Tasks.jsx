@@ -48,6 +48,7 @@ export const Tasks = () => {
     if (search)
       setRenderList(list.filter((data) => data.title.startsWith(search)));
     else setRenderList(list);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const renderAllCards = () => {
